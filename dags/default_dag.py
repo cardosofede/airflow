@@ -2,9 +2,9 @@ from airflow import DAG
 from airflow.operators.python import task
 from airflow.operators.python_operator import PythonOperator
 from datetime import datetime, timedelta
-from scripts.example import example_function
 
-
+def example_function(args):
+    pass
 
 default_args = {
     'email': ['federico.cardoso.e@gmail.com'],
@@ -19,12 +19,12 @@ with DAG(
     default_args=default_args,
     catchup=False) as dag:
 
-    etl_hummingbot = PythonOperator(
+    example_function = PythonOperator(
         task_id='example_task',
         python_callable=example_function,
         op_kwargs={'args': 'test'}
     )
 
 
-    etl_hummingbot
+    example_function
 
